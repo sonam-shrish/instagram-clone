@@ -3,6 +3,7 @@ import './Post.css';
 import { Avatar } from '@material-ui/core';
 
 const Post = ({ username, imageUrl, caption }) => {
+	console.log('Im rendering');
 	return (
 		<div className='post'>
 			{/* post header: avatar, username */}
