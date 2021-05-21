@@ -5,6 +5,7 @@ import { db, auth } from './firebase';
 import { Modal, Button, Input } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ImageUpload from './components/ImageUpload';
+import InstagramEmbed from 'react-instagram-embed';
 
 function getModalStyle() {
 	const top = 50;
@@ -165,27 +166,45 @@ function App() {
 				{user ? (
 					<Button onClick={() => auth.signOut()}>Sign Out</Button>
 				) : (
-					<>
+					<div>
 						<Button onClick={() => setOpenSignUp(true)}>Sign Up</Button>
 						<Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
-					</>
+					</div>
 				)}
 			</div>
 			<div className='app_posts'>
-				{posts.map(({ id, post }) => (
-					<Post
-						key={id}
-						username={post.username}
-						caption={post.caption}
-						imageUrl={post.imgUrl}
+				<div className='app_postsLeft'>
+					{posts.map(({ id, post }) => (
+						<Post
+							key={id}
+							username={post.username}
+							caption={post.caption}
+							imageUrl={post.imgUrl}
+							postId={id}
+							user={user}
+						/>
+					))}
+				</div>
+				<div className='app_postsRight'>
+					<InstagramEmbed
+						url='https://www.instagram/p/B_uf9dmAGPw/'
+						maxWidth={320}
+						hideCaption={false}
+						containerTagName='div'
+						protocol=''
+						injectScript
+						onLoading={() => {}}
+						onSuccess={() => {}}
+						onAfterRender={() => {}}
+						onFailure={() => {}}
 					/>
-				))}
+				</div>
 			</div>
 
 			{user?.displayName ? (
 				<ImageUpload username={user.displayName} />
 			) : (
-				<h3>Please log in first to display username</h3>
+				<h3>Please log in first to add posts</h3>
 			)}
 		</div>
 	);

@@ -27,3 +27,13 @@
 .post__text {
 	padding: 10px;
 }
+
+.post_commentBox {
+	display: flex;
+}
+.post_commentInput {
+	flex: 1;
+}
+.post_submit {
+	flex: 0;
+}
